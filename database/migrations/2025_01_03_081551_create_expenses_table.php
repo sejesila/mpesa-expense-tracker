@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('date')->nullable();
             $table->string('details')->nullable();
-            $table->string('paid_in')->nullable();
-            $table->string('withdrawn')->nullable();
+            $table->decimal('paid_in',15,2)->nullable();
+            $table->decimal('withdrawn',15,2)->nullable();
             $table->timestamps();
         });
     }

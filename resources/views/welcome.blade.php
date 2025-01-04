@@ -1,5 +1,8 @@
-<!-- resources/views/welcome.blade.php -->
-<x-app-layout>
-
-</x-app-layout>
-
+<x-layout>
+    <x-slot:heading>
+        Home
+    </x-slot:heading>
+<h1>
+    Hello world
+</h1>
+</x-layout>

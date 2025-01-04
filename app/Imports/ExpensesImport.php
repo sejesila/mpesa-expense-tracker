@@ -29,7 +29,7 @@ class ExpensesImport implements ToModel, WithChunkReading, ShouldQueue, WithHead
         try {
 // Check if 'paid_in' and 'withdrawn' are present and numeric
             $paidIn = isset($row['paid_in']) && is_numeric($row['paid_in']) ? $row['paid_in'] : null;
-            $withdrawn = isset($row['withdrawn']) && is_numeric($row['withdrawn']) ? $row['withdrawn'] : null;
+            $withdrawn = isset($row['withdrawn']) && is_numeric($row['withdrawn']) ? abs($row['withdrawn']) : null;
             // Transform the date field
             $date = Date::excelToDateTimeObject($row['date'])->format('Y-m-d H:i');
 

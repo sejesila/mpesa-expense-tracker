@@ -24,7 +24,9 @@ class ExpensesController extends Controller
     {
         $searchString = 'pay bill to';
 
-        $paybills = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])->paginate(50);;
+        $paybills = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
+            ->sortable()
+            ->simplePaginate(20);
 
         return view('components.paybill_table', compact('paybills'));
 
@@ -33,7 +35,9 @@ class ExpensesController extends Controller
     {
         $searchString = 'customer transfer to';
 
-        $sent_money = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])->paginate(50);;
+        $sent_money = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
+            ->sortable()
+            ->simplePaginate(20);
 
         return view('components.send_money_table', compact('sent_money'));
 
