@@ -140,19 +140,19 @@
         </div>
     </header>
     <main>
-        <div class="min-w-full mx-auto py-2 px-2">
+{{--        <div class="min-w-full mx-auto py-2 px-2">--}}
 
-            <div class="flex items-center justify-center m-2 p-2">
-                <form action="{{route('import')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input  type="file" name="expenses" required>
-                    <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">Import</button>
-                </form>
+{{--            <div class="flex items-center justify-center m-2 p-2">--}}
+{{--                <form action="{{route('import')}}" method="POST" enctype="multipart/form-data">--}}
+{{--                    @csrf--}}
+{{--                    <input  type="file" name="expenses" required>--}}
+{{--                    <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">Import</button>--}}
+{{--                </form>--}}
 
-            </div>
+{{--            </div>--}}
 
-        </div>
-        <div class="mx-auto w-full max-w-full px-4 py-4 sm:px-6 lg:px-8">
+{{--        </div>--}}
+        <div class="mx-auto flex justify-around max-w-full px-4 py-4 sm:px-6 lg:px-8">
             {{$slot}}
         </div>
     </main>
