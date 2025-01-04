@@ -1,6 +1,7 @@
-<x-layout>
+<x-layout :routeName="$routeName">
     <x-slot:heading>
         Paybill Payments
+
     </x-slot:heading>
     <div>
         <table class="table-auto w-full border-collapse border border-gray-300">

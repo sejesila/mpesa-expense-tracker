@@ -21,55 +21,80 @@ class ExpensesController extends Controller
         return redirect('/')->with('success', 'Import is being processed!');
     }
 
-    public function paybill()
+    public function paybill(Request $request)
     {
         $searchString = 'pay bill to';
+        $query = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%']);
 
-        $paybills = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
-            ->sortable()
-            ->simplePaginate(10);
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('details', 'LIKE', "%{$search}%")
+                    ->orWhere('date', 'LIKE', "%{$search}%")
+                    ->orWhere('withdrawn', 'LIKE', "%{$search}%")
+                    ->orWhere('paid_in', 'LIKE', "%{$search}%");
+            });
+        }
 
-        $total_paid_to_paybill = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
-            ->sum('withdrawn');
-        // Format the total_withdrawn with commas
+        $paybills = $query->sortable()->simplePaginate(10);
+
+        $total_paid_to_paybill = $query->sum('withdrawn');
         $formatted_paid_to_paybill = number_format($total_paid_to_paybill, 2);
+        $routeName = 'paybill';
 
-        return view('paybill', compact('paybills','formatted_paid_to_paybill'));
+        return view('paybill', compact('paybills', 'formatted_paid_to_paybill','routeName'));
 
     }
 
-    public function send_money()
+    public function send_money(Request $request)
     {
         $searchString = 'customer transfer to';
+        $query = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%']);
 
-        $sent_money = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
-            ->sortable()
-            ->simplePaginate(10);
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            \Log::info('Search query: ' . $search);
+            $query->where(function($q) use ($search) {
+                $q->where('details', 'LIKE', "%{$search}%")
+                    ->orWhere('date', 'LIKE', "%{$search}%")
+                    ->orWhere('withdrawn', 'LIKE', "%{$search}%")
+                    ->orWhere('paid_in', 'LIKE', "%{$search}%");
+            });
+        }
 
-        $total_sent = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
-            ->sum('withdrawn');
+        $sent_money = $query->sortable()->simplePaginate(10);
 
-        // Format the total_withdrawn with commas
+        $total_sent = $query->sum('withdrawn');
         $formatted_total_sent = number_format($total_sent);
 
-        return view('send_money', compact('sent_money', 'formatted_total_sent'));
+        $routeName = 'send_money';
 
+        return view('send_money', compact('sent_money', 'formatted_total_sent', 'routeName'));
     }
-    public function till()
+    public function till(Request $request)
     {
         $searchString = 'Merchant Payment';
+        $query = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%']);
 
-        $till_payaments = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
-            ->sortable()
-            ->simplePaginate(10);
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            \Log::info('Search query: ' . $search);
+            $query->where(function($q) use ($search) {
+                $q->where('details', 'LIKE', "%{$search}%")
+                    ->orWhere('date', 'LIKE', "%{$search}%")
+                    ->orWhere('withdrawn', 'LIKE', "%{$search}%")
+                    ->orWhere('paid_in', 'LIKE', "%{$search}%");
+            });
+        }
 
-        $total_till_payments = Expense::whereRaw('LOWER(details) LIKE ?', ['%' . strtolower($searchString) . '%'])
-            ->sum('withdrawn');
+        $till_payaments = $query->sortable()->simplePaginate(10);
+        \Log::info('Search results: ' . $till_payaments->count());
 
-        // Format the total_withdrawn with commas
+        $total_till_payments = $query->sum('withdrawn');
         $formatted_total_till_payments = number_format($total_till_payments);
 
-        return view('till', compact('till_payaments', 'formatted_total_till_payments'));
+        $routeName = 'till';
 
+        return view('till', compact('till_payaments', 'formatted_total_till_payments', 'routeName'));
     }
 }

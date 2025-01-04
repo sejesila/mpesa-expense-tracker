@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :routeName="$routeName">
     <x-slot:heading>
         Send Money
     </x-slot:heading>
