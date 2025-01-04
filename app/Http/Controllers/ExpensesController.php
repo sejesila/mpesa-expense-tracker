@@ -20,7 +20,6 @@ class ExpensesController extends Controller
         // Redirect with success message
         return redirect('/')->with('success', 'Import is being processed!');
     }
-
     public function paybill(Request $request)
     {
         $searchString = 'pay bill to';
@@ -88,7 +87,7 @@ class ExpensesController extends Controller
         }
 
         $till_payaments = $query->sortable()->simplePaginate(10);
-        \Log::info('Search results: ' . $till_payaments->count());
+
 
         $total_till_payments = $query->sum('withdrawn');
         $formatted_total_till_payments = number_format($total_till_payments);
@@ -97,4 +96,5 @@ class ExpensesController extends Controller
 
         return view('till', compact('till_payaments', 'formatted_total_till_payments', 'routeName'));
     }
+
 }

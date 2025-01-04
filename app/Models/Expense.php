@@ -16,6 +16,7 @@ class Expense extends Model
     ];
     // Add a custom accessor for the formatted date
     // Add a custom accessor for the formatted date
+
     public function getFormattedDateAttribute()
     {
         $date = Carbon::parse($this->attributes['date']);
