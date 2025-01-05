@@ -15,7 +15,7 @@
             <tbody class="">
             @foreach($paybills as $paybill)
                 <tr class="bg-gray-50 border-b dark:bg-gray-800">
-                    <td class="py-2 text-center px-2">{{$paybill->date}}</td>
+                    <td class="py-2 text-left px-2">{{$paybill->formatted_date}}</td>
                     <td class="py-2 px-2">{{$paybill->formatted_paybill}}</td>
                     <td class="py-2 text-center px-2">{{$paybill->withdrawn}}</td>
                 </tr>
@@ -23,7 +23,8 @@
             </tbody>
         </table>
         <div class="px-2 py-2">
-            {{$paybills->links()}}
+            <!-- Display pagination links -->
+            {{ $paybills->appends(request()->query())->links() }}
         </div>
     </div>
     <div>

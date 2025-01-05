@@ -12,7 +12,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($sent_money as $expense)
+            @foreach($total_sent as $expense)
                 <tr class="bg-gray-50 border-b dark:bg-gray-800 ">
 
                     <td class="py-2 px-2 text-left">{{ $expense->formatted_date }}</td>
@@ -25,7 +25,7 @@
             </tbody>
         </table>
         <div class="px-2 py-2">
-            {{ $sent_money->appends(request()->except('page'))->links() }}
+            {{ $total_sent->appends(request()->query())->links() }}
         </div>
     </div>
     <div>

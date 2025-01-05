@@ -12,6 +12,7 @@ Route::post('/import',[ExpensesController::class,'import'])->name('import');
 Route::get('/paybill',[ExpensesController::class,'paybill'])->name('paybill');
 Route::get('/till',[ExpensesController::class,'till'])->name('till');
 Route::get('/send_money',[ExpensesController::class,'send_money'])->name('send_money');
+Route::get('/received_money',[ExpensesController::class,'received_money'])->name('received_money');
 Route::get('/import', function () {
    //should match the name of your component file without the .blade.php extension
     return view('import_excel');

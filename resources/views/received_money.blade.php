@@ -1,6 +1,6 @@
 <x-layout :routeName="$routeName">
     <x-slot:heading>
-        Till Payments
+        Send Money
     </x-slot:heading>
     <div>
         <table class="table-auto w-full border-collapse border border-gray-300">
@@ -12,12 +12,12 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($till_payments as $till_payment)
+            @foreach($total_received as $inflow)
                 <tr class="bg-gray-50 border-b dark:bg-gray-800 ">
 
-                    <td class="py-2 px-2 text-left">{{ $till_payment->formatted_date }}</td>
-                    <td class="py-2 px-2 text-center">{{ $till_payment->formatted_merchant_details }}</td>
-                    <td class="py-2 text-center px-2">{{$till_payment->withdrawn}}</td>
+                    <td class="py-2 px-2 text-left">{{ $inflow->formatted_date }}</td>
+                    <td class="py-2 px-2 text-center">{{ $inflow->formatted_details }}</td>
+                    <td class="py-2 text-center px-2">{{$inflow->paid_in}}</td>
 
                 </tr>
             @endforeach
@@ -25,7 +25,7 @@
             </tbody>
         </table>
         <div class="px-2 py-2">
-            {{ $till_payments->appends(request()->query())->links() }}
+            {{ $total_received->appends(request()->query())->links() }}
         </div>
     </div>
     <div>
@@ -33,7 +33,7 @@
         <table class="table-auto w-full border-collapse border border-gray-300">
             <thead>
             <tr>
-                <th class="py-2 text-center px-2">Total Sent</th>
+                <th class="py-2 text-center px-2">Total Received</th>
 
             </tr>
             </thead>
@@ -41,7 +41,7 @@
 
             <tr class="bg-gray-50 border-b dark:bg-gray-800 ">
 
-                <td class="py-2 px-2 text-left">{{ $formatted_total_till_payments }}</td>
+                <td class="py-2 px-2 text-left">{{ $formatted_total_received }}</td>
 
             </tr>
 

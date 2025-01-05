@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Mpesa Expense Tracker</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -36,8 +36,8 @@
                             <x-nav-link href="/" :active="request()->is('/')">Dashboard</x-nav-link>
                             <x-nav-link href="/paybill" :active="request()->is('paybill')">Paybill</x-nav-link>
                             <x-nav-link href="/send_money" :active="request()->is('send_money')">Send Money</x-nav-link>
-                            <x-nav-link href="/till" :active="request()->is('')">Till</x-nav-link>
-                            <x-nav-link href="/received_money" :active="request()->is('')">Received Money</x-nav-link>
+                            <x-nav-link href="/till" :active="request()->is('till')">Till</x-nav-link>
+                            <x-nav-link href="/received_money" :active="request()->is('received_money')">Received Money</x-nav-link>
                         </div>
                     </div>
                 </div>
